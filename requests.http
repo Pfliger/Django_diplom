@@ -1,0 +1,207 @@
+# получение продуктов
+GET http://127.0.0.1:8000/api/v1/products/?price__gte=1000
+Content-Type: application/json
+
+###.
+
+
+# создание продуктов без авторизации
+POST http://127.0.0.1:8000/api/v1/products/
+Content-Type: application/json
+
+
+{
+  "name": "Test product",
+  "description": "text",
+  "price": 1000.00
+}
+
+###
+
+
+# создание продуктов юзер
+POST http://127.0.0.1:8000/api/v1/products/
+Content-Type: application/json
+Authorization: Token c66db1bca91691ffffdbe8131c146489f1bd2e97
+
+
+{
+  "name": "Test product",
+  "description": "text",
+  "price": 1000.00
+}
+
+###
+
+
+# создание продуктов админ
+POST http://127.0.0.1:8000/api/v1/products/
+Content-Type: application/json
+Authorization: Token 8d10b87e89200a69ecccd94e8a5102707d7c0e4a
+
+
+
+{
+  "name": "Test product",
+  "description": "text",
+  "price": 1000.00
+}
+
+###
+
+
+
+# получение отзывов
+GET http://127.0.0.1:8000/api/v1/product-reviews/?created_at__date=2021-05-11
+Content-Type: application/json
+
+###
+
+
+# создание отзыва 
+POST http://127.0.0.1:8000/api/v1/product-reviews/
+Content-Type: application/json
+Authorization: Token c66db1bca91691ffffdbe8131c146489f1bd2e97
+
+
+{
+  
+  "product_id": 2,
+  "review": "test review",
+  "grade": 1
+}
+
+###
+
+
+# изменение отзыва
+PUT http://127.0.0.1:8000/api/v1/product-reviews/9/
+Content-Type: application/json
+Authorization: Token 8d10b87e89200a69ecccd94e8a5102707d7c0e4a
+
+
+{
+  
+  "product_id": 2,
+  "review": "test review update",
+  "grade": 1
+}
+
+###
+
+
+# получение подборок
+GET http://127.0.0.1:8000/api/v1/product-collections
+Content-Type: application/json
+
+###
+
+
+# создание подборки 
+POST http://127.0.0.1:8000/api/v1/product-collections/
+Content-Type: application/json
+Authorization: Token 8d10b87e89200a69ecccd94e8a5102707d7c0e4a
+
+{
+  "title": "test collection",
+  "text": "text",
+  "products": [
+      {"product_id":1},
+      {"product_id":4}
+    ]
+}
+
+
+###
+
+
+# изменение подборки 
+PUT  http://127.0.0.1:8000/api/v1/product-collections/8/
+Content-Type: application/json
+Authorization: Token 8d10b87e89200a69ecccd94e8a5102707d7c0e4a
+
+{
+  "title": "test collection",
+  "text": "text",
+  "products": [
+      
+      {"product_id":2}
+    ]
+}
+
+
+###
+
+
+# получение заказов
+GET http://127.0.0.1:8000/api/v1/orders/
+Content-Type: application/json
+Authorization: Token 8d10b87e89200a69ecccd94e8a5102707d7c0e4a
+
+###
+
+
+# получение заказов без авторизации
+GET http://127.0.0.1:8000/api/v1/orders/
+Content-Type: application/json
+
+
+###
+
+
+# создание заказа
+POST http://127.0.0.1:8000/api/v1/orders/
+Content-Type: application/json
+Authorization: Token 8d10b87e89200a69ecccd94e8a5102707d7c0e4a
+
+{
+  "products": [
+    {
+      "product": 1,
+      "quantity": 3
+    },
+    {
+      "product": 4,
+      "quantity": 2
+    }
+    ]
+}
+
+
+###
+
+
+# изменение заказа админ
+PATCH http://127.0.0.1:8000/api/v1/orders/4/
+Content-Type: application/json
+Authorization: Token 8d10b87e89200a69ecccd94e8a5102707d7c0e4a
+
+{    
+  
+  "order_status": "DONE"
+}
+
+###
+
+
+# изменение заказа юзер
+PATCH http://127.0.0.1:8000/api/v1/orders/2/
+Content-Type: application/json
+Authorization: Token c66db1bca91691ffffdbe8131c146489f1bd2e97
+
+{  
+  "products": [
+    {
+      "product": 1,
+      "quantity": 2
+    },
+    {
+      "product": 2,
+      "quantity": 4
+    }
+    ],
+  
+  "order_status": "New"
+}
+
+###
